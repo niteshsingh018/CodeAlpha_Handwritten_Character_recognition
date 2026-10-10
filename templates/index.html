@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Handwritten Digit AI</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+
+        <h1>✍️ Handwritten Digit AI</h1>
+
+        <p>
+            Upload a handwritten digit and let
+            our CNN model recognize it.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>Upload Your Digit</h2>
+
+        <form action="/predict"
+              method="POST"
+              enctype="multipart/form-data">
+
+            <div class="upload-box">
+
+                <input
+                    type="file"
+                    name="image"
+                    accept="image/*"
+                    required
+                >
+
+                <p>
+                    Supported formats:
+                    PNG, JPG, JPEG
+                </p>
+
+            </div>
+
+            <button type="submit">
+                🔍 Predict Digit
+            </button>
+
+        </form>
+
+
+        {% if error %}
+
+        <div class="error">
+            {{ error }}
+        </div>
+
+        {% endif %}
+
+
+        {% if prediction is defined %}
+
+        <div class="result">
+
+            {% if image_url %}
+            <img class="uploaded-preview"
+                 src="{{ url_for('static', filename=image_url) }}"
+                 alt="Uploaded handwritten digit">
+            {% endif %}
+
+            <h2>Prediction Result</h2>
+
+            <div class="digit">
+                {{ prediction }}
+            </div>
+
+            <p class="confidence">
+                Confidence:
+                <strong>{{ confidence }}%</strong>
+            </p>
+
+            <div class="confidence-bar">
+
+                <div
+                    class="confidence-fill"
+                    style="width: {{ confidence }}%;">
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <div class="footer">
+
+        <p>
+            Powered by TensorFlow CNN
+        </p>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

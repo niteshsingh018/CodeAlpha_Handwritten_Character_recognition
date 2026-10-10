@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+
+# Runtime uploads
+static/uploads/*
+!static/uploads/.gitkeep
+
+# Large local dataset
+data/raw/*
+!data/raw/.gitkeep
+
+# Miscellaneous
+.ipynb_checkpoints/
+.DS_Store
+Thumbs.db
